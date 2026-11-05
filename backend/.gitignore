@@ -1,0 +1,33 @@
+SIMPLEFIN_TOKEN = "aHR0cHM6Ly9iZXRhLWJyaWRnZS5zaW1wbGVmaW4ub3JnL3NpbXBsZWZpbi9jbGFpbS82RjNBQjExREIzRjE4Mzg1MzUzREE2OEM2QUI2NEQ0OEVCQzMwNjg2QTFGMjUwOUY5MzEyRTgyNDZGN0U4QkZFRUExMDBGNDBDNkU0RDQ0Q0UyOUNCMjlGREQ4QTg0NUM5OUZBRDkyRjhEMTZDMzAxMjJGOTYxODM3REZGOThFOQ=="
+
+
+# Virtual Environments (uv defaults to .venv)
+.venv/
+env/
+venv/
+ENV/
+
+# Environment Variables / Secrets
+.env
+.env.*
+!.env.example
+
+# Python Cache and Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs and Databases (if you add SQLite later)
+*.log
+*.sqlite3
+db.sqlite3

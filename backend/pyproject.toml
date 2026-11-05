@@ -1,0 +1,30 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Elijah Zane Chapman", email = "ezc9@outlook.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.20.1",
+    "asyncpg>=0.32.0",
+    "bcrypt>=5.0.0",
+    "cryptography>=50.0.2",
+    "fastapi[standard]>=0.162.0",
+    "psycopg[binary]>=3.3.8",
+    "pydantic[email]>=2.14.2",
+    "sqlalchemy>=2.1.8",
+    "sqlalchemy-utils>=0.43.0",
+]
+
+[project.scripts]
+backend = "backend:main"
+
+[build-system]
+requires = ["uv_build>=0.12.15,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.fastapi]
+entrypoint = "src.backend.main:app"
