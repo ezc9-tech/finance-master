@@ -1,16 +1,13 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI
 import os
 import requests
 import base64
-import bcrypt
-from pydantic import BaseModel
-from sqlalchemy.orm import Session
-from backend.db.db import get_db
-from backend.models.models import User
-from backend.schema.schema import UserResponse, UserCreate
+from backend.routes.authRoutes import auth_router
 
 
 app = FastAPI()
+
+app.include_router(auth_router)
 
 @app.get("/net-worth")
 def get_financial_data():
@@ -48,26 +45,5 @@ def get_financial_data():
         return {"response": net_worth}
     
     except Exception as e:
+        response.status_code = 500
         return {"error": str(e)}
-
-
-@app.post("/create-user", response_model=UserResponse)
-def create_user(body: UserCreate, db:Session = Depends(get_db)):
-    existing_user = db.query(User).filter(
-        (User.email == body.email) | (User.username == body.username)
-    ).first()
-    if existing_user:
-        raise HTTPException(status_code=409, detail="User already exists")
-
-    hashed_password = bcrypt.hashpw(body.password.encode("utf-8"), bcrypt.gensalt())
-
-    user = User(
-        username=body.username,
-        email=body.email,
-        hashed_password=hashed_password.decode("utf-8"),
-    )
-    db.add(user)
-    db.commit()
-    db.refresh(user)
-
-    return user
